@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.myapplication.MainViewModel
 import com.example.myapplication.Room.User
+import com.example.myapplication.Static_Var
 import kotlin.math.log
 
 
@@ -39,6 +40,7 @@ fun Frame_Login(navController: NavHostController, viewModel: MainViewModel) {
             value = password,
             onValueChange = { newText1 ->
                 password = newText1
+                viewModel.findUser(login.text,password.text)
             }
         )
 
@@ -50,19 +52,25 @@ fun Frame_Login(navController: NavHostController, viewModel: MainViewModel) {
             else {
                 try {
 
-                if (searchResults.get(0).password == password.text && searchResults.get(0).login == login.text ){
-                    if (searchResults.get(0).access_rule.equals("Администратор"))
-                        navController.navigate("Fragment_Admin_Panel")
-                    if (searchResults.get(0).access_rule.equals("Врач"))
-                        navController.navigate("Fragment_Doc_Panel")
-                    if (searchResults.get(0).access_rule.equals("Пациент"))
-                        navController.navigate("Fragment_Guest_Panel")
-
-                    Log.e("TAG", "Frame_Login:" + searchResults.get(0).login + searchResults.get(0).password +" тут его роль  "+searchResults.get(0).access_rule)
-
-                }}catch (ex:java.lang.Exception){
-                    Log.e("TAG", "Frame_Login: Не верный пароль ", )
-                 //   Log.e("TAG", "Frame_Login:" + searchResults.get(0).login + searchResults.get(0).password)
+                    if (searchResults.get(0).password == password.text && searchResults.get(0).login == login.text) {
+                        if (searchResults.get(0).access_rule.equals("Администратор"))
+                            navController.navigate("Fragment_Admin_Panel")
+                        if (searchResults.get(0).access_rule.equals("Врач"))
+                            navController.navigate("Fragment_Doc_Panel")
+                        if (searchResults.get(0).access_rule.equals("Пациент")) {
+                            navController.navigate("Fragment_Guest_Panel")
+                            Static_Var.Current_GUEST_ID = searchResults.get(0).id
+                        }
+                        Log.e(
+                            "TAG",
+                            "Frame_Login:" + searchResults.get(0).login + searchResults.get(0).password + " тут его роль  " + searchResults.get(
+                                0
+                            ).access_rule
+                        )
+                    }
+                } catch (ex: java.lang.Exception) {
+                    Log.e("TAG", "Frame_Login: Не верный пароль ",)
+                    //   Log.e("TAG", "Frame_Login:" + searchResults.get(0).login + searchResults.get(0).password)
                 }
             }
         }) {

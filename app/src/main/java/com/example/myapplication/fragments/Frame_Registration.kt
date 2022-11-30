@@ -42,7 +42,7 @@ fun Frame_Registration(navController: NavHostController, viewModel: MainViewMode
                    "Пациент"
                 )
             )
-            navController.navigate("Fragment_Login")
+            navController.popBackStack()
         }) {
             Text(text = "Зарегистрироватся")
         }

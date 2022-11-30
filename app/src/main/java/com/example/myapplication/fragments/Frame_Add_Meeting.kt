@@ -1,45 +1,67 @@
 package com.example.myapplication.fragments
 
 import android.util.Log
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.myapplication.MainViewModel
-import com.example.myapplication.Room.User
+import com.example.myapplication.Room.Meeting
+import com.example.myapplication.Static_Var
 
-
-var access_rule: String=" "
+var time :String="9:00"
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun Frame_User_Add(navController: NavHostController, viewModel: MainViewModel) {
+fun Frame_Add_Meeting(navController: NavHostController, viewModel: MainViewModel) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
-        Text("Логин")
-        var login by remember { mutableStateOf(TextFieldValue("")) }
-        var password by remember { mutableStateOf(TextFieldValue("")) }
+        var date by remember { mutableStateOf(TextFieldValue("")) }
+
+        Text("Введите Дату")
+
+
+        val pattern = remember { Regex("^\\d+\$") }
 
         TextField(
-            value = login,
+            value = date,
             onValueChange = { newText ->
-                login = newText
-            }
+                    date = newText
+            },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
         )
-        Text("Пароль")
-        TextField(
-            value = password,
-            onValueChange = { newText1 ->
-                password = newText1
-            }
-        )
+
+        Text("Время")
+
         Spacer(modifier = Modifier.height(20.dp))
-        val options = listOf("Администратор", "Врач", "Пациент")
+        val options = listOf(
+            "9:00",
+            "9:30",
+            "10:00",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:30",
+            "15:00",
+            "15:30",
+            "16:00",
+            "16:30",
+            "17:00",
+            "17:30",
+            "18:00",
+            "18:30",
+            "19:30",
+            "20:00"
+        )
         var expanded by remember { mutableStateOf(false) }
         var selectedOptionText by remember { mutableStateOf(options[0]) }
 
@@ -53,7 +75,7 @@ fun Frame_User_Add(navController: NavHostController, viewModel: MainViewModel) {
                 readOnly = true,
                 value = selectedOptionText,
                 onValueChange = { },
-                label = { Text("Роль") },
+                label = { Text("Время Записи") },
                 trailingIcon = {
                     ExposedDropdownMenuDefaults.TrailingIcon(
                         expanded = expanded
@@ -72,8 +94,8 @@ fun Frame_User_Add(navController: NavHostController, viewModel: MainViewModel) {
                         onClick = {
                             selectedOptionText = selectionOption
                             expanded = false
-                            access_rule = selectionOption
-                            Log.e("TAG", "Frame_User_Add: " + access_rule)
+                            time = selectionOption
+                            Log.e("TAG", "Frame_User_Add: " + time)
                         }
                     ) {
                         Text(text = selectionOption)
@@ -81,18 +103,19 @@ fun Frame_User_Add(navController: NavHostController, viewModel: MainViewModel) {
                 }
             }
         }
+
         Button(onClick = {
-            viewModel.insertUser(
-                User(
-                    login.text,
-                    password.text,
-                    access_rule.toString()
+            viewModel.insertMeet(
+                Meeting(
+                    Static_Var.Current_GUEST_ID.toString(), date.text, time.toString()
                 )
             )
             navController.popBackStack()
-            Log.e("TAG", "Frame_User_Add: $access_rule")
+
         }) {
             Text(text = "Добавить")
         }
     }
+
+
 }

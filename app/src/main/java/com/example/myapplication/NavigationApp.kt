@@ -28,6 +28,9 @@ import com.example.myapplication.fragments.*
             composable("Fragment_User_Add") {
                 Frame_User_Add( navController ,viewModel )
             }
+            composable("Fragment_Meet_Add") {
+                Frame_Add_Meeting( navController ,viewModel )
+            }
             composable("Fragment_Admin_Panel") {
                 Frame_Admin_Panel(navController = navController,viewModel)
             }

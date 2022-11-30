@@ -5,11 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [(User::class)], version = 1)
+@Database(entities = [(User::class),(Meeting::class)], version = 1)
 abstract class HospitalRoomDatabase: RoomDatabase() {
  
-abstract fun userDao(): UserDao
- 
+abstract fun UserDao(): UserDao
+abstract fun MeetingDao(): MeetingDao
+
     companion object {
  
         private var INSTANCE: HospitalRoomDatabase? = null
