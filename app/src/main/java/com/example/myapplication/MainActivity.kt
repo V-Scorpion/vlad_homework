@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
                             )
                         )
 
-                       // viewModel.insertUser(User("admin","admin","Администратор"))
+                       // viewModel.insertMeet(User("admin","admin","Администратор"))
 
                         NavigationApp(viewModel)
 

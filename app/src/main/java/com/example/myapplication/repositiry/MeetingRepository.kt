@@ -4,8 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myapplication.Room.Meeting
 import com.example.myapplication.Room.MeetingDao
-import com.example.myapplication.Room.User
-import com.example.myapplication.Room.UserDao
 import kotlinx.coroutines.*
 
 
@@ -16,7 +14,7 @@ class MeetingRepository (private  val meetDao: MeetingDao) {
 
     fun insertMeet(newproduct: Meeting) {
         coroutineScope.launch(Dispatchers.IO) {
-            meetDao.insertUser(newproduct)
+            meetDao.insertMeet(newproduct)
         }
     }
 

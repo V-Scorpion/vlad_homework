@@ -9,7 +9,7 @@ import androidx.room.Query
 interface MeetingDao {
 
     @Insert
-    fun insertUser(meet: Meeting)
+    fun insertMeet(meet: Meeting)
 
     @Query("SELECT * FROM meeting WHERE userId = :userId")
     fun findMeet(userId: String): List<Meeting>
