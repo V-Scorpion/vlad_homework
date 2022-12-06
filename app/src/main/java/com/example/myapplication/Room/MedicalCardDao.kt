@@ -16,8 +16,8 @@ interface MedicalCardDao {
     @Update
     fun updateMedicalCard(medicalCard: MedicalCard)
 
-    @Query("SELECT * FROM medicalcard WHERE medicalcardId = :medicalcardId")
-    fun findMedicalCard(medicalcardId: String): List<MedicalCard>
+    @Query("SELECT * FROM medicalcard WHERE user_id = :user_id")
+    fun findMedicalCard(user_id: String): List<MedicalCard>
 
     @Query("DELETE FROM medicalcard WHERE medicalcardId = :medicalcard")
     fun deleteMedicalCard(medicalcard: String)

@@ -77,11 +77,11 @@ class MainViewModel(application: Application) : ViewModel() {
         repository_MedicalCard.insertMedicalCard(medicalCard)
     }
 
-    fun findMediclCard(user_id: String) {
+    fun findMedicalCard(user_id: String) {
         repository_MedicalCard.findMedicalCard(user_id)
     }
 
-    fun deleteMediclCard(name: String) {
+    fun deleteMedicalCard(name: String) {
         repository_MedicalCard.deleteMedicalCard(name)
     }
 }

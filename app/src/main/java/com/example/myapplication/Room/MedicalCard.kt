@@ -21,7 +21,7 @@ class MedicalCard {
 
     constructor() {}
 
-    constructor(id: Int, user_id: String, data: String) {
+    constructor(user_id: String, data: String) {
         this.id = id
         this.user_id = user_id
         this.data = data

@@ -1,10 +1,7 @@
 package com.example.myapplication.fragments
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
@@ -18,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.myapplication.MainViewModel
+import com.example.myapplication.Room.MedicalCard
 import com.example.myapplication.Static_Var
 
 @Composable
@@ -27,7 +25,9 @@ fun Frame_Guest_Panel(navController: NavHostController, viewModel: MainViewModel
             Text(text = "Записатся на прием")
         }
         val allMeet by viewModel.allGuestMeeting.observeAsState(listOf())
+        val allMedical_report by viewModel.allGuestMedicalReport.observeAsState(listOf())
         viewModel.findMeet(Static_Var.Current_GUEST_ID.toString())
+        viewModel.findMedicalCard(Static_Var.Current_GUEST_ID.toString())
         LazyColumn(
             Modifier
                 .fillMaxWidth()
@@ -42,6 +42,24 @@ fun Frame_Guest_Panel(navController: NavHostController, viewModel: MainViewModel
             items(list) { user ->
                 MeetRow(
                     date = user.date, time = user.time
+                )
+            }
+        }
+
+        LazyColumn(
+            Modifier
+                .fillMaxWidth()
+                .padding(10.dp)
+        ) {
+            val list2 = allMedical_report
+
+            item {
+                TitleRow_Medical_Report( head = "Диагноз")
+            }
+
+            items(list2) { report ->
+                MedicalCardRow(
+                   time = report.data
                 )
             }
         }
@@ -65,6 +83,23 @@ fun TitleRow_Meet( head3: String, head4: String) {
 }
 
 @Composable
+fun TitleRow_Medical_Report( head: String) {
+    Row(
+        modifier = Modifier
+            .background(MaterialTheme.colors.primary)
+            .fillMaxWidth()
+            .padding(5.dp)
+    ) {
+        Spacer(modifier = Modifier.width(20.dp).weight(0.2f))
+        Text(
+            head, color = Color.White,
+            modifier = Modifier.weight(0.2f)
+        )
+        Spacer(modifier = Modifier.width(20.dp).weight(0.2f))
+    }
+}
+
+@Composable
 fun MeetRow( date: String, time:String) {
     Row(
         modifier = Modifier
@@ -72,6 +107,17 @@ fun MeetRow( date: String, time:String) {
             .padding(5.dp)
     ) {
         Text(date.toString(), modifier = Modifier.weight(0.2f))
+        Text(time.toString(), modifier = Modifier.weight(0.2f))
+    }
+}
+
+@Composable
+fun MedicalCardRow( time:String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(5.dp)
+    ) {
         Text(time.toString(), modifier = Modifier.weight(0.2f))
     }
 }

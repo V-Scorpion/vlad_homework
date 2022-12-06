@@ -22,7 +22,7 @@ import com.example.myapplication.MainViewModel
 @Composable
 fun Frame_Doc_Panel(navController: NavHostController, viewModel: MainViewModel) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        Button(onClick = {navController.navigate("Fragment_User_Add") }) {
+        Button(onClick = {navController.navigate("Fragment_Medical_Card") }) {
             Text(text = "Добавить Диагноз")
         }
         val allMeet by viewModel.allMeeting.observeAsState(listOf())

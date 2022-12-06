@@ -40,5 +40,8 @@ import com.example.myapplication.fragments.*
             composable("Fragment_Doc_Panel") {
                 Frame_Doc_Panel( navController ,viewModel )
             }
+            composable("Fragment_Medical_Card") {
+                Frame_Add_Medical_Card( navController ,viewModel )
+            }
         }
     }

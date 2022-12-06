@@ -24,8 +24,8 @@ import kotlin.math.log
 fun Frame_Login(navController: NavHostController, viewModel: MainViewModel) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.fillMaxSize()) {
         Text("Логин")
-        var login by remember { mutableStateOf(TextFieldValue("admin")) }
-        var password by remember { mutableStateOf(TextFieldValue("admin")) }
+        var login by remember { mutableStateOf(TextFieldValue("")) }
+        var password by remember { mutableStateOf(TextFieldValue("")) }
 
         val searchResults by viewModel.searchResults.observeAsState(listOf())
 
