@@ -95,7 +95,7 @@ fun TitleRow_Medical_Report( head: String) {
             head, color = Color.White,
             modifier = Modifier.weight(0.2f)
         )
-        Spacer(modifier = Modifier.width(20.dp).weight(0.2f))
+        Spacer(modifier = Modifier.width(20 .dp).weight(0.2f))
     }
 }
 
