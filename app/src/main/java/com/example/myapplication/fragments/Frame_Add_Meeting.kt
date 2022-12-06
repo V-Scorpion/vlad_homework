@@ -116,6 +116,4 @@ fun Frame_Add_Meeting(navController: NavHostController, viewModel: MainViewModel
             Text(text = "Добавить")
         }
     }
-
-
 }

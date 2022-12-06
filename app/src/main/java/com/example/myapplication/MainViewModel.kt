@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.myapplication.Room.HospitalRoomDatabase
+import com.example.myapplication.Room.MedicalCard
 import com.example.myapplication.Room.Meeting
 import com.example.myapplication.Room.User
+import com.example.myapplication.repositiry.MedicalCardRepository
 import com.example.myapplication.repositiry.MeetingRepository
 import com.example.myapplication.repositiry.UserRepository
 
@@ -21,11 +23,16 @@ class MainViewModel(application: Application) : ViewModel() {
     private val repository_meeting: MeetingRepository
 
 
+    val allMedicalCard: LiveData<List<MedicalCard>>
+    val allGuestMedicalReport: LiveData<List<MedicalCard>>
+    private val repository_MedicalCard: MedicalCardRepository
+
 
     init {
     val HospitalDb = HospitalRoomDatabase.getInstance(application)
         val userDao = HospitalDb.UserDao()
         val meetingDao = HospitalDb.MeetingDao()
+        val medicalCardDao = HospitalDb.MedicalCardDao()
 
         repository_user = UserRepository(userDao)
 
@@ -36,6 +43,10 @@ class MainViewModel(application: Application) : ViewModel() {
 
         allMeeting = repository_meeting.allMeeting
         allGuestMeeting = repository_meeting.searchResults
+
+        repository_MedicalCard = MedicalCardRepository(medicalCardDao)
+        allMedicalCard = repository_MedicalCard.allMedicalCard
+        allGuestMedicalReport = repository_MedicalCard.searchResults
     }
 
     fun insertUser(user: User) {
@@ -60,5 +71,17 @@ class MainViewModel(application: Application) : ViewModel() {
 
     fun deleteMeet(name: String) {
         repository_meeting.deleteMeet(name)
+    }
+
+    fun insertMedicalCard(medicalCard: MedicalCard){
+        repository_MedicalCard.insertMedicalCard(medicalCard)
+    }
+
+    fun findMediclCard(user_id: String) {
+        repository_MedicalCard.findMedicalCard(user_id)
+    }
+
+    fun deleteMediclCard(name: String) {
+        repository_MedicalCard.deleteMedicalCard(name)
     }
 }

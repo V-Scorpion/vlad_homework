@@ -11,7 +11,7 @@ import androidx.room.Update
 interface MedicalCardDao {
 
     @Insert
-    fun insertMedicalCard(meet: Meeting)
+    fun insertMedicalCard(meet: MedicalCard)
 
     @Update
     fun updateMedicalCard(medicalCard: MedicalCard)

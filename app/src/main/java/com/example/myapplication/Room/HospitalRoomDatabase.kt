@@ -10,7 +10,7 @@ abstract class HospitalRoomDatabase: RoomDatabase() {
  
 abstract fun UserDao(): UserDao
 abstract fun MeetingDao(): MeetingDao
-abstract fun MedicalCard(): MedicalCardDao
+abstract fun MedicalCardDao(): MedicalCardDao
 
     companion object {
  
